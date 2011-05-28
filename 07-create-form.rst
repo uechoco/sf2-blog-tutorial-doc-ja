@@ -15,7 +15,7 @@ blogチュートリアル(7) 記事の追加
 記事を追加するページが増えますので、対応するルーティングを追加する必要があります。
 \ ``src/My/BlogBundle/Resources/config/routing.yml``\ に blog_add ルート(route)を追加してください。
 
-.. code-block:: yml
+.. code-block:: yaml
 
     # src/My/BlogBundle/Resources/config/routing.yml
     blog_index:

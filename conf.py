@@ -16,5 +16,4 @@ version = '0'
 release = '0.0.0'
 
 lexers['php'] = PhpLexer(startinline=True)
-lexers['yml'] = YamlLexer()
 

@@ -20,7 +20,7 @@ blogチュートリアル(10) 記事の編集
 です。記事を編集するページが増えますので、対応するルーティングを追加する必要があります。
 \ ``src/My/BlogBundle/Resources/config/routing.yml``\ に blog_edit ルート(route)を追加してください。
 
-.. code-block:: yml
+.. code-block:: yaml
 
     # src/My/BlogBundle/Resources/config/routing.yml
     blog_edit:

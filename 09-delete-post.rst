@@ -14,7 +14,7 @@ blogチュートリアル(9) 記事の削除
 記事を削除するURI (※ここではページではない) が増えますので、対応するルーティングを追加する必要があります。
 \ ``src/My/BlogBundle/Resources/config/routing.yml``\ に blog_delete ルート(route)を追加してください。
 
-.. code-block:: yml
+.. code-block:: yaml
 
     # src/My/BlogBundle/Resources/config/routing.yml
     blog_delete:
