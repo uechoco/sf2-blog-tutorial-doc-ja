@@ -31,6 +31,10 @@ blogチュートリアル
     05-list-page
     06-create-template
     07-create-form
+    08-form-validation
+    09-delete-post
+    10-edit-post
+    11-next-step
 
 .. _`CakePHPブログチュートリアル`: http://book.cakephp.org/ja/view/219/Blog
 .. _`Symfony Blogチュートリアル`: http://symfony.gr.jp/docs/for-beginners/blog-tutorial/

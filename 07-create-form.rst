@@ -13,9 +13,9 @@ blogチュートリアル(7) 記事の追加
 ----------------------------------------
 
 記事を追加するページが増えますので、対応するルーティングを追加する必要があります。
-\ ``src/My/BlogBundle/Resources/config/routing.yml``\ にblog_addルート(route)を追加してください。
+\ ``src/My/BlogBundle/Resources/config/routing.yml``\ に blog_add ルート(route)を追加してください。
 
-.. code-block:: yaml
+.. code-block:: yml
 
     # src/My/BlogBundle/Resources/config/routing.yml
     blog_index:
@@ -32,9 +32,9 @@ blogチュートリアル(7) 記事の追加
 
 .. note::
 
-    blog_addルート(route)は、blog_viewルート(route)よりも前に定義してください。
-    blog_viewルートは、{id}と思わしきあらゆる文字列とマッチしてしまうため、最後に定義しておく必要があります。
-    間違いを未然に防ぐために、{id}の条件として数値のみを受け付けるように制限することも可能です。
+    blog_add ルート(route)は、 blog_view ルート(route)よりも前に定義してください。
+    blog_view ルートは、 {id} と思わしきあらゆる文字列とマッチしてしまうため、最後に定義しておく必要があります。
+    間違いを未然に防ぐために、 {id} の条件として数値のみを受け付けるように制限することも可能です。
 
 Postモデル用のフォームの作成
 ----------------------------
@@ -104,22 +104,22 @@ Symfony2では、\ ``FormFactory``\ を用いてコントローラのアクシ�
     \ ``$this->data``\ の有無で判断しています。
     symfony 1.x系やSymfony2では、REST(ful)の概念に基づき、このような判定をHTTPメソッドで行います。
 
-バインドしたデータは、\ ``isValid()``\ メソッドでバリデーションができます。
+バインドしたデータは、 ``isValid()`` メソッドでバリデーションができます。
 今のところ、バリデーションルールを追加していないので、あまり意味はありません。
 バリデーションを通過した\ ``Post``\ オブジェクトを安全に取り出すには、
-\ ``getData()``\ メソッドを使います。
+``getData()`` メソッドを使います。
 
-フォームから取り出したオブジェクトをデータベースに登録するには、\ ``persist()``\ メソッドを使った後、
-\ ``flush()``\ メソッドを呼び出します。
+フォームから取り出したオブジェクトをデータベースに登録するには、 ``persist()`` メソッドを使った後、
+``flush()`` メソッドを呼び出します。
 
 .. note::
 
-    \ ``Post``\ オブジェクトをpersistするときに、\ ``createdAt``\ と\ ``updatedAt``\ の値を手動で代入しています。
+    ``Post`` オブジェクトを ``persist()`` するときに、 ``createdAt`` と ``updatedAt`` の値を手動で代入しています。
     Doctrine2には\ ``Timestampable``\ というBehaviorがあり、この代入操作を自動的に行ってくれる仕組みがあります。
 
 最後の数行で、\ ``GET``\ メソッドでアクセスされたときにテンプレートの描画を行っています。
-フォームオブジェクトを描画可能な\ ``FormView``\ オブジェクトに変換するために、
-\ ``createView()``\ メソッドを呼び出しています。
+フォームオブジェクトを描画可能な ``FormView`` オブジェクトに変換するために、
+``createView()`` メソッドを呼び出しています。
 
 フォームを表示するビューの作成
 ------------------------------
@@ -144,6 +144,15 @@ Symfony2では、\ ``FormFactory``\ を用いてコントローラのアクシ�
 
     Twigで使用可能なフォーム関数を詳しく知りたい方は、\ `Twig Template Form Function Reference`_\ を参照してください。
 
+また、記事の追加がしやすいように、ブログ一覧にリンクを追加しておきます。
+
+.. code-block:: jinja
+
+    {# src/My/BlogBundle/Resources/views/Default/index.html.twig #}
+    {# ... #}
+    <div>
+    <a href="{{ path('blog_add') }}">add post</a>
+    </div>
 
 ブラウザで確認
 --------------
