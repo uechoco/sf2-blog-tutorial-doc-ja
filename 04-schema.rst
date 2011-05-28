@@ -12,17 +12,17 @@ Postモデルの作成
 このチュートリアルでは、モデルを定義してから自動的にスキーマを作成する手順を行いたいと思います。
 スキーマはその過程で作成されますので、ご安心ください！
 
-Doctrineでは、pure phpのクラスでモデルを定義します。おそらく\ ``src/My/BlogBundle``\ ディレクトリにはまだ\ ``Entity``\ ディレクトリは存在しないと思いますので、ディレクトリを作成し、その中に以下のような\ ``Post.php``\ を作成してください。
+Doctrineでは、pure phpのクラスでモデルを定義します。おそらく ``src/My/BlogBundle`` ディレクトリにはまだ ``Entity`` ディレクトリは存在しないと思いますので、ディレクトリを作成し、その中に以下のような ``Post.php`` を作成してください。
 
 .. code-block:: php
 
     // src/My/BlogBundle/Entity/Post.php
     <?php
-    
+
     namespace My\BlogBundle\Entity;
-    
+
     use Doctrine\ORM\Mapping as ORM;
-    
+
     /**
      * @ORM\Entity
      */
@@ -34,22 +34,22 @@ Doctrineでは、pure phpのクラスでモデルを定義します。おそら�
          * @ORM\GeneratedValue(strategy="AUTO")
          */
         protected $id;
-        
+
         /**
          * @ORM\Column(type="string", length=255)
          */
         protected $title;
-        
+
         /**
          * @ORM\Column(type="text")
          */
         protected $body;
-        
+
         /**
          * @ORM\Column(type="datetime")
          */
         protected $createdAt;
-        
+
         /**
          * @ORM\Column(type="datetime")
          */
@@ -58,7 +58,7 @@ Doctrineでは、pure phpのクラスでモデルを定義します。おそら�
 
 .. note::
 
-    Doctrineはphpオブジェクトのための永続的透過性を提供しているので、どんなphpクラスでモデルを定義しても動作します。
+    DoctrineはPHPオブジェクトのための透過的永続性を提供しているので、どんなPHPクラスでモデルを定義しても動作します。
 
 .. note::
 
@@ -88,7 +88,7 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
 
 .. code-block:: php
 
-    
+
         /**
          * Get id
          *
@@ -98,7 +98,7 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             return $this->id;
         }
-        
+
         /**
          * Set title
          *
@@ -108,7 +108,7 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             $this->title = $title;
         }
-        
+
         /**
          * Get title
          *
@@ -118,7 +118,7 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             return $this->title;
         }
-        
+
         /**
          * Set body
          *
@@ -128,7 +128,7 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             $this->body = $body;
         }
-        
+
         /**
          * Get body
          *
@@ -138,7 +138,7 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             return $this->body;
         }
-        
+
         /**
          * Set createdAt
          *
@@ -148,7 +148,7 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             $this->createdAt = $createdAt;
         }
-        
+
         /**
          * Get createdAt
          *
@@ -158,7 +158,7 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             return $this->createdAt;
         }
-        
+
         /**
          * Set updatedAt
          *
@@ -168,7 +168,7 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             $this->updatedAt = $updatedAt;
         }
-        
+
         /**
          * Get updatedAt
          *
@@ -184,11 +184,11 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
     さきほどのPostクラスを書くときに手を抜いてアノテーションのコメントブロックを書かなかった場合は、
     おそらくgetter/setterメソッドは自動生成されていないでしょう。
     ``doctrine:generate:entities``\ コマンドは、 *マッピング情報* がないと動きません。
-    
+
     マッピング情報というのは先ほど書いたアノテーションの事で、YAMLやXMLでも記述することができます。
     例えばsymfony 1.x系に慣れている方は、こう行った情報は１つのファイルにまとめたいと考えるでしょう。
     その場合は、\ ``doctrine.orm.yml``\ という1つのファイルにすべてのマッピング情報を書くこともできます。
-    
+
     マッピング情報の簡単な例が知りたい場合は、\ `Doctrine ORM`_\ を参照してください。
 
 
@@ -207,7 +207,7 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
 .. code-block:: bash
 
     ATTENTION: This operation should not be executed in an production enviroment.
-    
+
     Creating database schema...
     Database schema created successfully!
 

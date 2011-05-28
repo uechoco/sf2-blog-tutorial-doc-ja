@@ -64,14 +64,14 @@ viewアクションのためのテンプレートも作成します。
 
 .. code-block:: jinja
 
-   <h1>{{ post.title }}</h1>
-   <p><small>Created: {{ post.createdAt|date('Y/m/d H:i') }}</small></p>
-   <p>{{ post.body|nl2br }}</p>
+    <h1>{{ post.title }}</h1>
+    <p><small>Created: {{ post.createdAt|date('Y/m/d H:i') }}</small></p>
+    <p>{{ post.body|nl2br }}</p>
 
 ここでは、新たに\ ``nl2br``\ フィルタが出てきましたが、このフィルタは拡張機能として定義されていて、
 標準では読み込まれません。\ ``nl2br``\ フィルタを読み込むためには、設定ファイルを修正します。
 
-.. code-block:: yaml
+.. code-block:: yml
 
     # app/config/config.yml
 

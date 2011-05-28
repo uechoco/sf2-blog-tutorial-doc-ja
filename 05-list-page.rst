@@ -8,7 +8,7 @@ blogチュートリアル(5) ブログ閲覧ページの作成
 ページの作成
 ------------
 
-Symfony2で新しくページを作成する場合、2つのステップが必要になります。（参考：\ `Creating Pages in Symfony2`_\ ）
+Symfony2で新しくページを作成する場合、2つのステップが必要になります（参考：\ `Creating Pages in Symfony2`_\ ）。
 
 - *ルーティング(route)の作成*\ : ルーティングはURIとコントローラを関連付ける役割があります。Symfony2はWebリクエストを元に、定義されたルーティングの中からマッチするものを見つけ出し、そのコントローラのアクションを実行します。
 - *コントローラの作成*\ : コントローラはWebリクエストを受け取って何らかの処理をした後に、Symfony2の\ ``Response``\ オブジェクトを返す役割をになっています。
@@ -39,7 +39,7 @@ Controllerに直にアノテーションを書いて定義する方法もあり�
     blog_index:
         pattern:  /
         defaults: { _controller: MyBlogBundle:Default:index }
-    
+
     blog_view:
         pattern:  /{id}
         defaults: { _controller: MyBlogBundle:Default:view }
@@ -70,9 +70,9 @@ Controllerに直にアノテーションを書いて定義する方法もあり�
 
     // src/My/BlogBundle/Controller/DefaultController.php
     namespace My\BlogBundle\Controller;
-    
+
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-    
+
     class DefaultController extends Controller
     {
         public function indexAction()
@@ -81,7 +81,7 @@ Controllerに直にアノテーションを書いて定義する方法もあり�
             $posts = $em->getRepository('MyBlogBundle:Post')->findAll();
             return $this->render('MyBlogBundle:Default:index.html.twig', array('posts' => $posts));
         }
-    
+
         public function viewAction($id)
         {
             $em = $this->get('doctrine')->getEntityManager();

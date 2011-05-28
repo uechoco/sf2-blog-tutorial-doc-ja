@@ -17,13 +17,13 @@ blogチュートリアル
 
 #. 動作しているWebサーバ。Apacheを使用している前提で書いてありますので、Apacheの基本的な設定に関する知識が必要です。
 #. 動作しているデータベースサーバ。MySQLを使用する前提で書いてあります。必要によってphpMyAdminなどのデータベース管理ツールなどを導入してください。
-#. phpやオブジェクト指向プログラミングの基本的な知識。Symfony2ではphp 5.3から導入された\ *名前空間*\ や\ *クロージャ*\  、\ *静的遅延束縛*\ などの機能を活用しています。所々で解説をしますが、事前に学んでおくと非常に有利です。（参考： `php 5.3.0の新機能`_ ）
+#. PHPやオブジェクト指向プログラミングの基本的な知識。Symfony2ではPHP 5.3から導入された\ *名前空間*\ や\ *クロージャ*\  、\ *静的遅延束縛*\ などの機能を活用しています。所々で解説をしますが、事前に学んでおくと非常に有利です。（参考：\ `PHP 5.3の新機能`_\ ）
 
 それでは、はじめましょう！
 
 .. toctree::
     :maxdepth: 1
-    
+
     01-introduction
     02-create-database
     03-create-bundle
@@ -34,4 +34,4 @@ blogチュートリアル
 
 .. _`CakePHPブログチュートリアル`: http://book.cakephp.org/ja/view/219/Blog
 .. _`Symfony Blogチュートリアル`: http://symfony.gr.jp/docs/for-beginners/blog-tutorial/
-.. _`php 5.3.0の新機能`: http://jp.php.net/manual/ja/migration53.new-features.php
+.. _`PHP 5.3の新機能`: http://jp.php.net/manual/ja/migration53.new-features.php
