@@ -30,6 +30,7 @@ blogチュートリアル
     04-schema
     05-list-page
     06-create-template
+    07-create-form
 
 .. _`CakePHPブログチュートリアル`: http://book.cakephp.org/ja/view/219/Blog
 .. _`Symfony Blogチュートリアル`: http://symfony.gr.jp/docs/for-beginners/blog-tutorial/
