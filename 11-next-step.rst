@@ -35,7 +35,7 @@ Symfony2 には非常にたくさんのドキュメントが揃っています�
 - `Glossary`_ : Symfony2 の基本的な用語が簡単に説明されている用語辞典です。
 - `ORM Documentation 2.0`_ : Doctrine2 ORM の API 、 Reference 、 Cookbook があります。
 - `DBAL Document 2.0`_ : Doctrine2 DBAL の API 、Reference があります。
-- `FriendsOfSymfony - GitHub`: Symfony2 の精鋭たちがメンテナンスをしているgithubアカウントです。ベストプラクティスの詰まった Bundle が公開されています。
+- `FriendsOfSymfony - GitHub`_ : Symfony2 の精鋭たちがメンテナンスをしているgithubアカウントです。ベストプラクティスの詰まった Bundle が公開されています。
 
 .. _`Book`: http://symfony.com/doc/current/book/index.html
 .. _`Cookbook`: http://symfony.com/doc/current/cookbook/index.html
