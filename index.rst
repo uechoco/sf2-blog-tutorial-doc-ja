@@ -35,6 +35,7 @@ blogチュートリアル
     09-delete-post
     10-edit-post
     11-next-step
+    customize/index
 
 .. _`CakePHPブログチュートリアル`: http://book.cakephp.org/ja/view/219/Blog
 .. _`Symfony Blogチュートリアル`: http://symfony.gr.jp/docs/for-beginners/blog-tutorial/
