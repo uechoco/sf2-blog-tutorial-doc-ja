@@ -25,6 +25,7 @@ indexアクションのテンプレート
 
 .. code-block:: jinja
 
+    {# src/My/BlogBundle/Resources/views/Default/index.html.twig #}
     <h1>Blog posts</h1>
     <table>
         <tr>
@@ -64,6 +65,7 @@ viewアクションのためのテンプレートも作成します。
 
 .. code-block:: jinja
 
+    {# src/My/BlogBundle/Resources/views/Default/view.html.twig #}
     <h1>{{ post.title }}</h1>
     <p><small>Created: {{ post.createdAt|date('Y/m/d H:i') }}</small></p>
     <p>{{ post.body|nl2br }}</p>
@@ -74,15 +76,12 @@ viewアクションのためのテンプレートも作成します。
 .. code-block:: yaml
 
     # app/config/config.yml
-
-    # ...
     # Twig Configuration
     twig:
         debug:            %kernel.debug%
         strict_variables: %kernel.debug%
         extensions:
             - twig.extension.text
-    # ...
 
 Twigの設定の末尾に、2行追加しています。
 

@@ -54,17 +54,6 @@ HTML5 を解釈しないブラウザでは、データを追加するフォー�
 各バリデーションルールを記述しています。\ ``NotBlank``\ や\ ``MinLength``\ など、
 バリデーションの意味は文字通りです。
 
-バリデーションをアノテーションで定義する場合は、もう1つ設定が必要になります。
-\ ``app/config/config.yml``\ を開いて、\ ``framework.validation``\ の設定値を以下のように変更します。
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    framework:
-        # ...
-        validation:      { enabled: true, enable_annotations: true }
-        # ...
-
 ブラウザで確認
 --------------
 

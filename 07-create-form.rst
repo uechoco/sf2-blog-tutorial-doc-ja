@@ -135,9 +135,9 @@ Symfony2では、\ ``FormFactory``\ を用いてコントローラのアクシ�
         <input type="submit" value="Save Post" />
     </form>
 
-フォームタグのaction属性には、\ ``path``\ Twig関数でURIを生成しています。
-\ ``form_enctype``\ Twig関数は、ファイルアップロードフォームなどの時に``enctype="multipart/form-data"``を自動的に付加する関数です。
-\ ``form_widget``\ Twig関数は、HTMLウィジェットを描画する関数です。
+フォームタグのaction属性には、 path() Twig関数でURIを生成しています。
+form_enctype() Twig関数は、ファイルアップロードフォームなどの時に ``enctype="multipart/form-data"`` を自動的に付加する関数です。
+form_widget() Twig関数は、HTMLウィジェットを描画する関数です。
 フォームコレクション全体を与えることもできますし、個別のフォームフィールドを与えることもできます。
 
 .. note::
