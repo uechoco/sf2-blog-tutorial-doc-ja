@@ -27,12 +27,21 @@ Symfony2では、コアフレームワークの機能からあなたが書こう
 
 .. note::
 
+    app/consoleコマンドを実行する際のカレントディレクトリが現在のSymfony2プロジェクトのルートディレクトリであることを確認して下さい。
+    appディレクトリ上で console と呼び出したり、他のカレントディレクトリから呼び出したりすると、
+    正しい位置にバンドルが生成されない可能性があります。
+
+.. note::
+
+    Windowsユーザーがコマンドプロンプトで init:bundle コマンドを呼び出す場合は "My¥¥BlogBundle" と入力してください。
+
+.. note::
+
     init:bundleコマンドを実行したときに以下のようなエラーが起きた場合は、app/cacheディレクトリの権限がない可能性があります。
     sudo chmod -R 777 app/cache/ などのコマンドで、権限の問題が解消できるかもしれません。
 
     [RuntimeException]
     Unable to write in the cache directory (/path-to-root/Symfony/app/cache/dev)
-
 
 ``init:bundle`` コマンドに成功すると、コンソールに以下のような出力がなされているでしょう。
 
