@@ -20,4 +20,5 @@ blogチュートリアルのカスタマイズ編は、Symfony2をもっと理�
 
     01-routing-requirements
     02-twig-inheritance
+    03-session-flash
 
