@@ -19,4 +19,5 @@ blogチュートリアルのカスタマイズ編は、Symfony2をもっと理�
     :maxdepth: 1
 
     01-routing-requirements
+    02-twig-inheritance
 
