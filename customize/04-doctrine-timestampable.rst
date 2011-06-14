@@ -28,7 +28,7 @@ YAMLやXMLで使用する場合はこの指定は必要ありません。
     }
 
 ライフサイクル・コールバックが有効になったら、所定の書式でメソッドを登録するだけです。
-例えば、最初に永続化(persit)される直前にだけコールバックされるメソッドは以下のように書きます。
+例えば、最初に永続化(persist)される直前にだけコールバックされるメソッドは以下のように書きます。
 
 .. code-block:: php
 
@@ -72,7 +72,7 @@ blogアプリケーションのPostエンティティの投稿日時と更新日
         // ...
         
         /**
-         * set values bedore persit
+         * set values bedore persist
          *
          * @ORM\prePersist
          */
@@ -95,7 +95,7 @@ blogアプリケーションのPostエンティティの投稿日時と更新日
         // ...
     }
 
-次に DefaultController.php の addAction() と editAction() の中で persit() する直前にあった投稿日時と更新日時の定義を削除します。
+次に DefaultController.php の addAction() と editAction() の中で persist() する直前にあった投稿日時と更新日時の定義を削除します。
 
 .. code-block:: php
 
