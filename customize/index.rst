@@ -22,5 +22,6 @@ blogチュートリアルのカスタマイズ編は、Symfony2をもっと理�
     02-twig-inheritance
     03-session-flash
     04-doctrine-timestampable
+    05-create-form-class
 
 
