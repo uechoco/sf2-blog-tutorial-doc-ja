@@ -16,6 +16,7 @@ Doctrineでは、pure phpのクラスでモデルを定義します。おそら�
 
 .. code-block:: php
 
+    <?php
     // src/My/BlogBundle/Entity/Post.php
 
     namespace My\BlogBundle\Entity;
