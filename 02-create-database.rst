@@ -29,6 +29,7 @@ MySQLにblogsymfony2データベースを作成
     [parameters]
         database_driver   = pdo_mysql
         database_host     = localhost
+        database_port     =
         database_name     = blogsymfony2
         database_user     = blogsymfony2
         database_password = blogsymfony2

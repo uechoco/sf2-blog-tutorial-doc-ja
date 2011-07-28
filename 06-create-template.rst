@@ -70,18 +70,18 @@ viewアクションのためのテンプレートも作成します。
     <p><small>Created: {{ post.createdAt|date('Y/m/d H:i') }}</small></p>
     <p>{{ post.body|nl2br }}</p>
 
-ここでは、新たに\ ``nl2br``\ フィルタが出てきましたが、このフィルタは拡張機能として定義されていて、
-標準では読み込まれません。\ ``nl2br``\ フィルタを読み込むためには、設定ファイルを修正します。
+ここでは、新たに ``nl2br`` フィルタが出てきましたが、このフィルタは拡張機能として定義されていて、
+標準では読み込まれません。\ ``nl2br`` フィルタを読み込むためには、
+設定ファイルを修正して以下のブロックを追記してください:
 
 .. code-block:: yaml
 
     # app/config/config.yml
-    # Twig Configuration
-    twig:
-        debug:            %kernel.debug%
-        strict_variables: %kernel.debug%
-        extensions:
-            - twig.extension.text
+    services:
+        twig.extension.text:
+            class: Twig_Extensions_Extension_Text
+            tags:
+                - { name: twig.extension }
 
 Twigの設定の末尾に、2行追加しています。
 

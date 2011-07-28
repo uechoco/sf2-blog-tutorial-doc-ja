@@ -14,10 +14,12 @@ DefaultController の addAction() や editAction() のフォーム作成部を�
 フォーム生成部を分離することで、アプリケーション内で再利用することができます。
 
 フォーム生成部分を独立したphpクラスに分離するには、 ``Symfony\Component\Form\AbstractType`` を継承したクラスを作成し、
-``buildForm()`` メソッドを実装します。例えば商品名と商品価格を表すフォームクラスを作ると以下のようになります。
+``buildForm()`` メソッドと ``getName()`` メソッドを実装します。
+例えば商品名と商品価格を表すフォームクラスを作ると以下のようになります。
 
 .. code-block:: php
 
+    <?php
     // src/Acme/StoreBundle/Form/ProductType.php
     namespace Acme\StoreBundle\Form;
     
@@ -32,6 +34,11 @@ DefaultController の addAction() や editAction() のフォーム作成部を�
                 ->add('name');
                 ->add('price', 'money', array('currency' => 'USD'))
             ;
+        }
+
+        public function getName()
+        {
+            return 'product';
         }
     }
 
@@ -99,12 +106,17 @@ blogアプリケーションのフォームもクラスを分離して再利用�
                 ->add('body')
             ;
         }
-    
+        
         public function getDefaultOptions(array $options)
         {
             return array(
                 'data_class' => 'My\BlogBundle\Entity\Post',
             );
+        }
+        
+        public function getName()
+        {
+            return 'post';
         }
     }
 

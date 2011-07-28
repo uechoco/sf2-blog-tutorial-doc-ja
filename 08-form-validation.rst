@@ -34,7 +34,7 @@ HTML5 を解釈しないブラウザでは、データを追加するフォー�
     // ...
     
         /**
-         * @ORM\Column(type="string", length=255)
+         * @ORM\Column(name="title", type="string", length=255)
          * @Assert\NotBlank()
          * @Assert\MinLength(2)
          * @Assert\MaxLength(50)
@@ -42,7 +42,7 @@ HTML5 を解釈しないブラウザでは、データを追加するフォー�
         protected $title;
     
         /**
-         * @ORM\Column(type="text")
+         * @ORM\Column(name="body", type="text")
          * @Assert\NotBlank()
          * @Assert\MinLength(10)
          */
