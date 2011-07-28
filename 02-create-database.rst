@@ -3,7 +3,7 @@ blogチュートリアル(2) データベースの設定
 
 .. note::
 
-    この記事は、Symfony2 BETA4バージョンで動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
+    この記事は、Symfony 2.0.0 で動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
 
 MySQLにblogsymfony2データベースを作成
 -------------------------------------
@@ -29,6 +29,7 @@ MySQLにblogsymfony2データベースを作成
     [parameters]
         database_driver   = pdo_mysql
         database_host     = localhost
+        database_port     =
         database_name     = blogsymfony2
         database_user     = blogsymfony2
         database_password = blogsymfony2

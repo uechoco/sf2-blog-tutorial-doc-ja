@@ -3,7 +3,7 @@ blogチュートリアル(8) データのバリデーション
 
 .. note::
 
-    この記事は、Symfony2 BETA4バージョンで動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
+    この記事は、Symfony 2.0.0 で動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
 
 最近のブラウザを使っている人は、
 前のステップでデータを追加するフォームのタイトルや本文に何も入力しないで送信しようとすると、
@@ -34,7 +34,7 @@ HTML5 を解釈しないブラウザでは、データを追加するフォー�
     // ...
     
         /**
-         * @ORM\Column(type="string", length=255)
+         * @ORM\Column(name="title", type="string", length=255)
          * @Assert\NotBlank()
          * @Assert\MinLength(2)
          * @Assert\MaxLength(50)
@@ -42,7 +42,7 @@ HTML5 を解釈しないブラウザでは、データを追加するフォー�
         protected $title;
     
         /**
-         * @ORM\Column(type="text")
+         * @ORM\Column(name="body", type="text")
          * @Assert\NotBlank()
          * @Assert\MinLength(10)
          */

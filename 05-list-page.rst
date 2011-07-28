@@ -3,35 +3,47 @@ blogチュートリアル(5) ブログ閲覧ページの作成
 
 .. note::
 
-    この記事は、Symfony2 BETA4バージョンで動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
+    この記事は、Symfony 2.0.0 で動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
 
 ページの作成
 ------------
 
-Symfony2で新しくページを作成する場合、2つのステップが必要になります（参考：\ `Creating Pages in Symfony2`_\ ）。
+Symfony2 で新しくページを作成する場合、2つのステップが必要になります（参考：\ `Symfony2 でのページ作成`_\ ）。
 
-- *ルーティング(route)の作成*\ : ルーティングはURIとコントローラを関連付ける役割があります。Symfony2はWebリクエストを元に、定義されたルーティングの中からマッチするものを見つけ出し、そのコントローラのアクションを実行します。
-- *コントローラの作成*\ : コントローラはWebリクエストを受け取って何らかの処理をした後に、Symfony2の\ ``Response``\ オブジェクトを返す役割をになっています。
+- *ルーティング(route)の作成*\ : ルーティングはURIとコントローラを関連付ける役割があります。Symfony2 は Web リクエストを元に、定義されたルーティングの中からマッチするものを見つけ出し、そのコントローラのアクションを実行します。
+- *コントローラの作成*\ : コントローラはWebリクエストを受け取って何らかの処理をした後に、Symfony2 の\ ``Response``\ オブジェクトを返す役割をになっています。
 
 ルーティングの作成
 ------------------
 
-デフォルトでは、ルーティングの設定ファイルは\ ``app/config/routing.yml``\ に配置されています。
-ほかのSymfony2のアプリケーションと同様に、YAML、XML、PHPの形式で記述することができます。
-Controllerに直にアノテーションを書いて定義する方法もあります。ここでは標準的なYAML形式で記述します。
+デフォルトでは、ルーティングの設定ファイルは ``app/config/routing.yml`` に配置されています。
+ほかの Symfony2 のアプリケーションと同様に、YAML、XML、PHPの形式で記述することができます。
+Controller に直にアノテーションを書いて定義する方法もあります。ここでは標準的な YAML 形式で記述します。
+
+以前実行した ``generate:bundle`` コマンドによって、\ ``app/config/routing.yml`` に以下の記述が追加されています。
+
+.. code-block:: yaml
+
+    # app/config/routing.yml
+    MyBlogBundle:
+        resource: "@MyBlogBundle/Resources/config/routing.yml"
+        prefix:   /
+
+この記述を、以下のようにルーティング名と prefix 変更します。
 
 .. code-block:: yaml
 
     # app/config/routing.yml
     blog:
-        prefix: /blog
         resource: "@MyBlogBundle/Resources/config/routing.yml"
+        prefix: /blog
 
-このルーティング定義は、「/blogから始まるURIは\ ``MyBlogBundle/Resources/config/routing.yml``\ で定義していて、
-このルーティングルールをblogと呼ぶ」ことを表しています。
-このようにSymfony2では、あるルーティング定義ファイルから別のルーティング定義ファイルを読み込むことができます。
+このルーティング定義は、「\ ``/blog`` から始まる URI は ``MyBlogBundle/Resources/config/routing.yml`` で定義していて、
+このルーティングルールを blog と呼ぶ」ことを表しています。
+このように Symfony2 では、あるルーティング定義ファイルから別のルーティング定義ファイルを読み込むことができます。
 
-つぎに、読み込まれる側のルーティング定義ファイルを記述します。
+次に、読み込まれる側のルーティング定義ファイルを記述します。自動生成された状態では ``/hello/{name}`` という URL に対する
+ルーティング定義が記述されていますが、すべて削除して次のように書き換えてください:
 
 .. code-block:: yaml
 
@@ -59,15 +71,16 @@ Controllerに直にアノテーションを書いて定義する方法もあり�
 コントローラの作成
 ------------------
 
-さきほど作成したルーティングでは、\ ``/blog/``\ というURIでアクセスされると、
-\ ``MyBlogBundle:Default:index``\ がフレームワークによって実行されるように定義しました。
+さきほど作成したルーティングでは、\ ``/blog/`` というURIでアクセスされると、
+\ ``MyBlogBundle:Default:index`` がフレームワークによって実行されるように定義しました。
 ページの作成の2つ目のステップとして、コントローラを作成していきます。
 
-\ ``init:bundle``\ コマンドでバンドルを作成しているので、\ ``MyBlogBundle``\ にはすでに\ ``DefaultController``\ が作られているでしょう。
-ファイルの中を以下のように変更します。
+\ ``init:bundle`` コマンドでバンドルを作成しているので、\ ``MyBlogBundle`` にはすでに ``DefaultController`` が作られているでしょう。
+ファイルの中を次のように変更します:
 
 .. code-block:: php
 
+    <?php
     // src/My/BlogBundle/Controller/DefaultController.php
     namespace My\BlogBundle\Controller;
 
@@ -113,5 +126,5 @@ Doctrine2の\ ``Repository``\ オブジェクトは、個々のモデルに対�
 \ ``MyBlogBundle``\ がバンドル名、\ ``Default``\ がコントローラ名、\ ``index.html.twig``\ がテンプレート名を指します。
 この時、テンプレートファイルは\ ``src/My/BlogBundle/Resources/views/Default/index.html.twig``\ を参照します。
 
-.. _`Creating Pages in Symfony2`: http://symfony.com/doc/current/book/page_creation.html
+.. _`Symfony2 でのページ作成`: http://docs.symfony.gr.jp/symfony2/book/page_creation.html 
 .. _`Routing`: http://symfony.com/doc/current/book/routing.html

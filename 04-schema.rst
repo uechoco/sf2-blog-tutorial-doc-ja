@@ -3,102 +3,136 @@ blogチュートリアル(4) テーブルスキーマとエンティティクラ
 
 .. note::
 
-    この記事は、Symfony2 BETA4バージョンで動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
+    この記事は、Symfony 2.0.0 で動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
 
 Postモデルの作成
 ----------------
 
-お気づきかと思いますが、まだスキーマ（データベース上のテーブル）を作成していません。
-このチュートリアルでは、モデルを定義してから自動的にスキーマを作成する手順を行いたいと思います。
-スキーマはその過程で作成されますので、ご安心ください！
+お気づきかと思いますが、まだスキーマ(データベース上のテーブル)を作成していません。
+このチュートリアルでは、\ *エンティティ* と呼ばれるスキーマ定義ファイルを定義してから自動的にスキーマを作成する手順で行いたいと思います。
 
-Doctrineでは、pure phpのクラスでモデルを定義します。おそらく ``src/My/BlogBundle`` ディレクトリにはまだ ``Entity`` ディレクトリは存在しないと思いますので、ディレクトリを作成し、その中に以下のような ``Post.php`` を作成してください。
+Doctrineでは、pure phpのクラスでスキーマを定義します。\ ``generate:doctrine:entity`` コマンドでエンティティファイルを自動生成します。
+コマンドの実行中に４〜５個の質問項目がありますが、すべての項目でエンターを入力してください。
+
+.. code-block:: bash 
+
+    $ php app/console generate:doctrine:entity --entity=MyBlogBundle:Post --format=annotation --fields="title:string(255) body:text createdAt:datetime updatedAt:datetime"
+
+次のようなコマンドの実行メッセージになります:
+
+.. code-block:: none
+
+                                                     
+          Welcome to the Doctrine2 entity generator  
+                                                     
+        
+        
+        This command helps you generate Doctrine2 entities.
+        
+        First, you need to give the entity name you want to generate.
+        You must use the shortcut notation like AcmeBlogBundle:Post.
+        
+        The Entity shortcut name [MyBlogBundle:Post]: 
+        
+        Determine the format to use for the mapping information.
+        
+        Configuration format (yml, xml, php, or annotation) [annotation]: 
+        
+        Instead of starting with a blank entity, you can add some fields now.
+        Note that the primary key will be added automatically (named id).
+        
+        Available types: array, object, boolean, integer, smallint, 
+        bigint, string, text, datetime, datetimetz, date, time, decimal, float.
+        
+        New field name (press <return> to stop adding fields): 
+        
+        Do you want to generate an empty repository class [no]? 
+        
+                                     
+          Summary before generation  
+                                     
+        
+        You are going to generate a "MyBlogBundle:Post" Doctrine2 entity
+        using the "annotation" format.
+        
+        Do you confirm generation [yes]? 
+        
+                             
+          Entity generation  
+                             
+        
+        Generating the entity code: OK
+        
+                                                       
+          You can now start using the generated code!  
+                                                       
+
+``generate:doctrine:entity`` コマンドによって、\ ``src/My/BlogBundle/Entity/`` ディレクトリが作成され、その中に次のような ``Post.php`` が生成されます:
 
 .. code-block:: php
 
     <?php
-    // src/My/BlogBundle/Entity/Post.php
-
+    
     namespace My\BlogBundle\Entity;
-
+    
     use Doctrine\ORM\Mapping as ORM;
-
+    
     /**
+     * My\BlogBundle\Entity\Post
+     *
+     * @ORM\Table()
      * @ORM\Entity
      */
     class Post
     {
         /**
+         * @var integer $id
+         *
+         * @ORM\Column(name="id", type="integer")
          * @ORM\Id
-         * @ORM\Column(type="integer")
          * @ORM\GeneratedValue(strategy="AUTO")
          */
-        protected $id;
-
+        private $id;
+    
         /**
-         * @ORM\Column(type="string", length=255)
+         * @var string $title
+         *
+         * @ORM\Column(name="title", type="string", length=255)
          */
-        protected $title;
-
+        private $title;
+    
         /**
-         * @ORM\Column(type="text")
+         * @var text $body
+         *
+         * @ORM\Column(name="body", type="text")
          */
-        protected $body;
-
+        private $body;
+    
         /**
-         * @ORM\Column(type="datetime")
+         * @var datetime $createdAt
+         *
+         * @ORM\Column(name="createdAt", type="datetime")
          */
-        protected $createdAt;
-
+        private $createdAt;
+    
         /**
-         * @ORM\Column(type="datetime")
+         * @var datetime $updatedAt
+         *
+         * @ORM\Column(name="updatedAt", type="datetime")
          */
-        protected $updatedAt;
-    }
-
-.. note::
-
-    DoctrineはPHPオブジェクトのための透過的永続性を提供しているので、どんなPHPクラスでモデルを定義しても動作します。
-
-.. note::
-
-    symfony 1.x系のDoctrineは\ ``ActiveRecord``\ デザインパターンを元に作られていました。
-    モデルクラスがテーブルを表し、ここのインスタンスがテーブルの1つの行を表すような構成でした。
-    Symfony2のDoctrine2では\ *ドメイン駆動設計*\ という新しい設計思想を導入したことにより、\ ``ActiveRecord``\ を廃止しました。
-    代わりに採用されたのが\ ``Data Mapper``\ と\ ``Unit Of Work``\ パターンです。
-    これらのデザインパターンは、マーチン・ファウラーの『エンタープライズ アプリケーションアーキテクチャパターン』に詳しく載っています。
-
-.. note::
-
-    このチュートリアルでは、ORMに限定してモデルを作成しています。
-    ODMを考慮した、より抽象的な定義方法を学びたい場合は、
-    `FriendsOfSymfony`_ がgithubで提供している `UserBundle`_ や `CommentBundle`_ などのソースコードが参考になります。
-
-Postクラスを見てください。まず、本当はgetter/setterメソッドを書かなくてはいけませんが、省略しています。
-代わりにアノテーション形式の設定が書かれていて、各カラムがどんなスキーマなのかを表しています。
-Doctrineがこれらのメソッドを自動的に作成するコマンドを提供しているので、使ってみましょう！
-
-.. code-block:: bash
-
-    $ php app/console doctrine:generate:entities MyBlogBundle
-    Generating entities for bundle "MyBlogBundle"
-      > generating My\BlogBundle\Entity\Post
-
-コマンドが成功すると、\ ``Post.php``\ が書き換えられていて、以下のようなメソッドが追加されています。
-
-.. code-block:: php
-
-
+        private $updatedAt;
+    
+    
         /**
          * Get id
          *
-         * @return integer $id
+         * @return integer 
          */
         public function getId()
         {
             return $this->id;
         }
-
+    
         /**
          * Set title
          *
@@ -108,17 +142,17 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             $this->title = $title;
         }
-
+    
         /**
          * Get title
          *
-         * @return string $title
+         * @return string 
          */
         public function getTitle()
         {
             return $this->title;
         }
-
+    
         /**
          * Set body
          *
@@ -128,17 +162,17 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             $this->body = $body;
         }
-
+    
         /**
          * Get body
          *
-         * @return text $body
+         * @return text 
          */
         public function getBody()
         {
             return $this->body;
         }
-
+    
         /**
          * Set createdAt
          *
@@ -148,17 +182,17 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             $this->createdAt = $createdAt;
         }
-
+    
         /**
          * Get createdAt
          *
-         * @return datetime $createdAt
+         * @return datetime 
          */
         public function getCreatedAt()
         {
             return $this->createdAt;
         }
-
+    
         /**
          * Set updatedAt
          *
@@ -168,28 +202,37 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
         {
             $this->updatedAt = $updatedAt;
         }
-
+    
         /**
          * Get updatedAt
          *
-         * @return datetime $updatedAt
+         * @return datetime 
          */
         public function getUpdatedAt()
         {
             return $this->updatedAt;
         }
+    }
 
 .. note::
 
-    さきほどのPostクラスを書くときに手を抜いてアノテーションのコメントブロックを書かなかった場合は、
-    おそらくgetter/setterメソッドは自動生成されていないでしょう。
-    ``doctrine:generate:entities``\ コマンドは、 *マッピング情報* がないと動きません。
+    DoctrineはPHPオブジェクトのための透過的永続性を提供しているので、どんなPHPクラスでモデルを定義しても動作します。
 
-    マッピング情報というのは先ほど書いたアノテーションの事で、YAMLやXMLでも記述することができます。
-    例えばsymfony 1.x系に慣れている方は、こう行った情報は１つのファイルにまとめたいと考えるでしょう。
-    その場合は、\ ``doctrine.orm.yml``\ という1つのファイルにすべてのマッピング情報を書くこともできます。
+.. note::
 
-    マッピング情報の簡単な例が知りたい場合は、\ `Doctrine ORM`_\ を参照してください。
+    symfony 1.x 系のDoctrine は ``ActiveRecord`` デザインパターンを元に作られていました。
+    モデルクラスがテーブルを表し、ここのインスタンスがテーブルの1つの行を表すような構成でした。
+    Symfony2 の Doctrine2 では\ *ドメイン駆動設計*\ という新しい設計思想を導入したことにより、\ ``ActiveRecord``\ を廃止しました。
+    代わりに採用されたのが\ ``Data Mapper``\ と\ ``Unit Of Work``\ パターンです。
+    これらのデザインパターンは、マーチン・ファウラーの『エンタープライズ アプリケーションアーキテクチャパターン』に詳しく載っています。
+
+.. note::
+
+    このチュートリアルでは、ORMに限定してモデルを作成しています。
+    ODMを考慮した、より抽象的な定義方法を学びたい場合は、
+    `FriendsOfSymfony`_ がgithubで提供している `UserBundle`_ や `CommentBundle`_ などのソースコードが参考になります。
+
+Postクラスを見てください。コマンドで指定したカラムとその getter/setter メソッドが作成されています。
 
 
 スキーマの作成
@@ -211,8 +254,8 @@ Doctrineがこれらのメソッドを自動的に作成するコマンドを提
     Creating database schema...
     Database schema created successfully!
 
-phpMyAdminなどのデータベース管理ツールでblogsymfony2データベースを確認してみると、
-Postテーブルが作られていて、その中にid、title、body、createdAt、updatedAtの5つのカラムが
+phpMyAdmin などのデータベース管理ツールで blogsymfony2 データベースを確認してみると、
+Post テーブルが作られていて、その中にid、title、body、createdAt、updatedAtの5つのカラムが
 作成されていることがわかります。
 
 
