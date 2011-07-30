@@ -11,6 +11,7 @@ blogチュートリアル(1) Symfony2のダウンロードとインストール
 まずは最新のSymfony2 Standard Editionをダウンロードしてきましょう。
 
 - `Symfony2の全体像 <http://docs.symfony.gr.jp/symfony2/quick_tour/the_big_picture.html>`_
+- `Symfony のインストールと設定 <http://docs.symfony.gr.jp/symfony2/book/installation.html>`_
 
 上記Quick Tourのページを参照して、Symfony2 Standard Editionをインストールして下さい。
 
