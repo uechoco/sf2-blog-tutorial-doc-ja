@@ -23,12 +23,12 @@ HTML5 を解釈しないブラウザでは、データを追加するフォー�
 以前のステップでORMの設定をアノテーションで記述したので、
 バリデーションもアノテーションで記述します。
 
-\ ``src/My/BlogBundle/Entiry/Post.php``\ を開いて、\ ``$title``\ と\ ``$body``\ の変数定義箇所を
+\ ``src/My/BlogBundle/Entity/Post.php``\ を開いて、\ ``$title``\ と\ ``$body``\ の変数定義箇所を
 以下のように変更します。
 
 .. code-block:: php
 
-    // src/My/BlogBundle/Entiry/Post.php
+    // src/My/BlogBundle/Entity/Post.php
     use Symfony\Component\Validator\Constraints as Assert;
     
     // ...
