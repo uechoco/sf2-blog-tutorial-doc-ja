@@ -118,7 +118,7 @@ blogチュートリアル(10) 記事の編集
         </tr>
         {% else %}
         <tr>
-            <td colspan="3">No posts found</td>
+            <td colspan="4">No posts found</td>
         </tr>
         {% endfor %}
     </table>
