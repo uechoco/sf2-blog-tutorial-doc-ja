@@ -126,7 +126,7 @@ extends 構文を記述し、今まで書いてあったコンテンツを body 
         </tr>
         {% else %}
         <tr>
-            <td colspan="3">No posts found</td>
+            <td colspan="4">No posts found</td>
         </tr>
         {% endfor %}
     </table>
