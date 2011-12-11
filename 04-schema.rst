@@ -3,24 +3,25 @@ blogチュートリアル(4) テーブルスキーマとエンティティクラ
 
 .. note::
 
-    この記事は、Symfony 2.0.0 で動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
+    この記事は、Symfony 2.0.7 で動作確認しています。
 
 Postモデルの作成
 ----------------
 
 お気づきかと思いますが、まだスキーマ(データベース上のテーブル)を作成していません。
-このチュートリアルでは、\ *エンティティ* と呼ばれるスキーマ定義ファイルを定義してから自動的にスキーマを作成する手順で行いたいと思います。
+このチュートリアルでは、まず\ **エンティティクラス**\ を定義し、エンティティクラスのマッピング情報から自動的にスキーマを作成する手順で行いたいと思います。
 
-Doctrineでは、pure phpのクラスでスキーマを定義します。\ ``generate:doctrine:entity`` コマンドでエンティティファイルを自動生成します。
-コマンドの実行中に４〜５個の質問項目がありますが、すべての項目でエンターを入力してください。
+Doctrineでは、pure phpのクラスでエンティティを定義します。
+``generate:doctrine:entity`` コマンドでエンティティクラスを自動生成します。
+次のコマンドを実行してください。コマンドの実行中に４〜５個の質問項目がありますが、すべての項目で何も入力せずにエンターを入力してください。
 
-.. code-block:: bash 
+.. code-block:: console
 
     $ php app/console generate:doctrine:entity --entity=MyBlogBundle:Post --format=annotation --fields="title:string(255) body:text createdAt:datetime updatedAt:datetime"
 
 次のようなコマンドの実行メッセージになります:
 
-.. code-block:: none
+.. code-block:: console
 
                                                      
           Welcome to the Doctrine2 entity generator  
@@ -220,34 +221,34 @@ Doctrineでは、pure phpのクラスでスキーマを定義します。\ ``gen
 
 .. note::
 
-    symfony 1.x 系のDoctrine は ``ActiveRecord`` デザインパターンを元に作られていました。
+    symfony 1.x 系で使われていた Doctrine 1 では ``ActiveRecord`` デザインパターンを元に作られていました。
     モデルクラスがテーブルを表し、ここのインスタンスがテーブルの1つの行を表すような構成でした。
-    Symfony2 の Doctrine2 では\ *ドメイン駆動設計*\ という新しい設計思想を導入したことにより、\ ``ActiveRecord``\ を廃止しました。
-    代わりに採用されたのが\ ``Data Mapper``\ と\ ``Unit Of Work``\ パターンです。
-    これらのデザインパターンは、マーチン・ファウラーの『エンタープライズ アプリケーションアーキテクチャパターン』に詳しく載っています。
+    Doctrine 2 では\ *ドメイン駆動設計*\ をアーキテクチャの中心に据えており、\ ``ActiveRecord``\ ではなく\ ``Data Mapper``\ パターンでモデルを扱うことになります。
+    これらのデザインパターンについての詳細は、マーチン・ファウラーの『\ `エンタープライズ アプリケーションアーキテクチャパターン`_\ 』を参照してください。
 
 .. note::
 
-    このチュートリアルでは、ORMに限定してモデルを作成しています。
+    このチュートリアルでは、Doctrine ORMに限定してモデルを作成しています。
     ODMを考慮した、より抽象的な定義方法を学びたい場合は、
     `FriendsOfSymfony`_ がgithubで提供している `UserBundle`_ や `CommentBundle`_ などのソースコードが参考になります。
 
-Postクラスを見てください。コマンドで指定したカラムとその getter/setter メソッドが作成されています。
+生成されたPostクラスを見てください。コマンドで指定したカラムとその getter/setter メソッドが作成されています。
 
 
 スキーマの作成
 --------------
 
-さきほど作成したエンティティを元に、スキーマを作成します。
-スキーマの作成は\ ``doctrine:schema:create``\ コマンドで行います。
+さきほど作成したエンティティクラスをよく見ると、アノテーション（コメントを使った特殊な構文）でフィールドの情報が記述されていました。
+この情報を元に、実際にデータベースにスキーマを作成します。
+初回のスキーマの作成は\ ``doctrine:schema:create``\ コマンドで行います。
 
-.. code-block:: bash
+.. code-block:: console
 
     $ php app/console doctrine:schema:create
 
 コンソールには、以下のような出力がなされて、スキーマが作成されたと書かれているでしょう。
 
-.. code-block:: bash
+.. code-block:: console
 
     ATTENTION: This operation should not be executed in an production enviroment.
 
@@ -263,3 +264,4 @@ Post テーブルが作られていて、その中にid、title、body、created
 .. _`UserBundle`: https://github.com/FriendsOfSymfony/UserBundle
 .. _`CommentBundle`: https://github.com/FriendsOfSymfony/CommentBundle
 .. _`Doctrine ORM`: http://symfony.com/doc/current/book/doctrine/orm.html
+.. _`エンタープライズ アプリケーションアーキテクチャパターン`: http://capsctrl.que.jp/kdmsnr/wiki/bliki/?EnterpriseArchitecture

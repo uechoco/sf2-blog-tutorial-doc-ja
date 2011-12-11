@@ -3,7 +3,7 @@
 
 .. note::
 
-    この記事は、Symfony 2.0.0 で動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
+    この記事は、Symfony 2.0.7 で動作確認しています。
 
 フラッシュメッセージを表示する
 ------------------------------
@@ -36,14 +36,14 @@ Symfony2にはセッション管理の一環としてフラッシュメッセー
 --------
 
 実際にblogアプリケーションを修正してみましょう。
-まずはDefaultControllerの addAction() 、 editAction() 、 deleteAction() のリダイレクト文の直前に、
+まずは ``Default`` コントローラの ``newAction()``\ 、\ ``editAction()``\ 、\ ``deleteAction()`` のリダイレクト文の直前に、
 フラッシュメッセージを登録する処理を追加します。
 
 .. code-block:: php
 
     // src/My/BlogBundle/Controller/DefaultController.php
     
-        public function addAction()
+        public function newAction()
         {
             // ...
             $this->get('session')->setFlash('my_blog', '記事を追加しました');

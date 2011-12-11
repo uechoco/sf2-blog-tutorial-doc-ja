@@ -3,7 +3,7 @@ blogチュートリアル(9) 記事の削除
 
 .. note::
 
-    この記事は、Symfony 2.0.0 で動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
+    この記事は、Symfony 2.0.7 で動作確認しています。
 
 
 次は、ユーザーが既存の記事を削除できるようにしてみましょう。
@@ -12,19 +12,19 @@ blogチュートリアル(9) 記事の削除
 -------------------------------------
 
 記事を削除するURI (※ここではページではない) が増えますので、対応するルーティングを追加する必要があります。
-\ ``src/My/BlogBundle/Resources/config/routing.yml``\ に blog_delete ルート(route)を追加してください。
+``src/My/BlogBundle/Resources/config/routing.yml`` に ``blog_delete`` ルート(route)を追加してください。
 
 .. code-block:: yaml
 
     # src/My/BlogBundle/Resources/config/routing.yml
     blog_delete:
-        pattern:  /delete/{id}
+        pattern:  /{id}/delete
         defaults: { _controller: MyBlogBundle:Default:delete }
 
 削除アクションの作成
 --------------------
 
-続いて、Defaultコントローラにアクションを追加します。
+続いて、\ ``Default`` コントローラに ``delete`` アクションを追加します。
 
 .. code-block:: php
 
@@ -36,7 +36,7 @@ blogチュートリアル(9) 記事の削除
         // ...
         public function deleteAction($id)
         {
-            $em = $this->get('doctrine')->getEntityManager();
+            $em = $this->getDoctrine()->getEntityManager();
             $post = $em->find('MyBlogBundle:Post', $id);
             if (!$post) {
                 throw new NotFoundHttpException('The post does not exist.');
@@ -47,9 +47,9 @@ blogチュートリアル(9) 記事の削除
         }
     }
 
-このコードでは、与えられた {id} を元に、該当記事のレコードを取得しています。
-該当記事が見つからなかった場合は、 ``NotFoundHttpException`` 例外を発行して処理を中断します。
-該当記事が見つかった場合は、 EntityManager に ``remove()`` メソッドで削除指示を出して、 ``flush()`` します。
+このコードでは、与えられた ``{id}`` を元に、該当記事のレコードに対応するエンティティを取得しています。
+エンティティが見つからなかった場合は、\ ``NotFoundHttpException`` 例外をスローして処理を中断します。
+エンティティが見つかった場合は、\ ``EntityManager`` の ``remove()`` メソッドで削除指示を出して、\ ``flush()`` します。
 削除後は記事一覧にリダイレクトします。
 
 また、記事の削除をするためのリンクを、記事一覧に追加します。
@@ -65,11 +65,11 @@ blogチュートリアル(9) 記事の削除
             <td>CreatedAt</td>
             <td>Operation</td>
         </tr>
-        <!-- ここから、posts配列をループして、投稿記事の情報を表示 -->
+        {# ここから、posts配列をループして、投稿記事の情報を表示 #}
         {% for post in posts %}
         <tr>
             <td>{{ post.id }}</td>
-            <td><a href="{{ path('blog_view', {'id':post.id}) }}">{{ post.title }}</a></td>
+            <td><a href="{{ path('blog_show', {'id':post.id}) }}">{{ post.title }}</a></td>
             <td>{{ post.createdAt|date('Y/m/d H:i') }}</td>
             <td><a href="{{ path('blog_delete', {'id':post.id}) }}">Delete</a></td>
         </tr>
@@ -81,7 +81,7 @@ blogチュートリアル(9) 記事の削除
     </table>
     
     <div>
-    <a href="{{ path('blog_add') }}">add post</a>
+    <a href="{{ path('blog_new') }}">add post</a>
     </div>
 
 
