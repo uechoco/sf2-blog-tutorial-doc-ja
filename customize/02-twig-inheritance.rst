@@ -3,34 +3,34 @@
 
 .. note::
 
-    この記事は、Symfony 2.0.0 で動作確認しています。Symfony2がバージョンアップすると、動作しなくなる恐れがあります。
+    この記事は、Symfony 2.0.7 で動作確認しています。
 
 HTMLタグが出力されていない
 --------------------------
 
-現在のblogアプリケーションをブラウザで表示してHTMLソースを見てみると、<html>タグが正しく出力されていないことに気づきます。
-各テンプレートファイルに直接<html>や<body>タグを記述しても良いのですが、
-Twigの **継承** 機能を使えば、すべてのテンプレートファイルの結果に対して簡単に<html>タグを追加することができます。
+現在のblogアプリケーションをブラウザで表示してHTMLソースを見てみると、\ ``<html>`` タグが正しく出力されていないことに気づきます。
+各テンプレートファイルに直接 ``<html>`` や ``<body>`` タグを記述しても良いのですが、
+Twigの **継承** 機能を使えば、すべてのテンプレートファイルの結果に対して簡単に ``<html>`` タグを追加することができます。
 
 テンプレートの継承
 ------------------
 
 多くの場合、アプリケーションのテンプレートには、ヘッダやフッタ、サイドバーなどの共通要素が含まれています。
-一般的なテンプレートエンジンでは、それらの共通要素を別ファイルに小分けにして include するような機構が用意されています。
-Twigにも別ファイルのテンプレートを include する仕組みはありますが、
+一般的なテンプレートエンジンでは、それらの共通要素を別ファイルに小分けにして ``include`` するような機構が用意されています。
+Twigにも別ファイルのテンプレートを ``include`` する仕組みはありますが、
 Twigではテンプレートの継承という別の方法で解決することが多いでしょう。
 テンプレートの継承を使うと、あるテンプレートを別のテンプレートで装飾していくことができるようになります。
 
 テンプレートの継承の例を挙げてみます。まずはベース・レイアウトのテンプレートを用意します。
 ベース・レイアウトのテンプレートには先に挙げたような共通要素が多く含まれていますが、
 それらの要素を **block** というTwigのタグで囲い、名前をつけます。
-例えば<title>タグに関する block は以下のように定義できるでしょう。
+例えば ``<title>`` タグに関する ``block`` は以下のように定義できるでしょう。
 
 .. code-block:: jinja
 
     <title>{% block title %}Welcome!{% endblock %}</title>
 
-このように、ベース・レイアウトのテンプレートにいくつもの block を定義していきます。
+このように、ベース・レイアウトのテンプレートにいくつもの ``block`` を定義していきます。
 
 次に、子となるテンプレートファイルを用意し、ベース・レイアウトのテンプレートを継承します。
 以下のような構文で継承することができます。
@@ -39,22 +39,22 @@ Twigではテンプレートの継承という別の方法で解決すること�
 
     {% extends '::base.html.twig' %}
 
-子となるテンプレートでは、継承した親のテンプレートの block を上書きすることができます。
-title block を上書きしてみましょう。
+子となるテンプレートでは、継承した親のテンプレートの ``block`` を上書きすることができます。
+``title block`` を上書きしてみましょう。
 
 .. code-block:: jinja
 
     {% block title %}Child Template{% endblock %}
 
-このように、 block 単位で上書きしていくことで、HTMLを形作っていきます。
+このように、\ ``block`` 単位で上書きしていくことで、HTMLを形作っていきます。
 なお、テンプレートは複数回継承することができます。
 
 .. note::
 
-    継承という言葉から連想されるように、テンプレートの継承はphpのクラスの継承とよく似ています。
-    block の定義は、 php のクラスでは ベースのメソッドに当たります。
-    テンプレートを継承することは、 php のクラスで extends することに当たります。
-    そして、 block の中身を上書きすることは、メソッドのオーバーライドに当たります。
+    継承という言葉から連想されるように、テンプレートの継承はPHPのクラスの継承とよく似ています。
+    ``block`` の定義は、PHP のクラスでは ベースクラスのメソッドに当たります。
+    テンプレートを継承することは、PHP のクラスで extends することに当たります。
+    そして、block の中身を上書きすることは、メソッドのオーバーライドに当たります。
 
 
 ベース・レイアウト・テンプレート
@@ -116,11 +116,11 @@ extends 構文を記述し、今まで書いてあったコンテンツを body 
             <td>CreatedAt</td>
             <td>Operation</td>
         </tr>
-        <!-- ここから、posts配列をループして、投稿記事の情報を表示 -->
+        {# ここから、posts配列をループして、投稿記事の情報を表示 #}
         {% for post in posts %}
         <tr>
             <td>{{ post.id }}</td>
-            <td><a href="{{ path('blog_view', {'id':post.id}) }}">{{ post.title }}</a></td>
+            <td><a href="{{ path('blog_show', {'id':post.id}) }}">{{ post.title }}</a></td>
             <td>{{ post.createdAt|date('Y/m/d H:i') }}</td>
             <td><a href="{{ path('blog_edit', {'id':post.id}) }}">Edit</a> <a href="{{ path('blog_delete', {'id':post.id}) }}">Delete</a></td>
         </tr>
@@ -132,13 +132,13 @@ extends 構文を記述し、今まで書いてあったコンテンツを body 
     </table>
     
     <div>
-    <a href="{{ path('blog_add') }}">add post</a>
+    <a href="{{ path('blog_new') }}">add post</a>
     </div>
     {% endblock %}
 
 .. code-block:: jinja
 
-    {# src/My/BlogBundle/Resources/views/Default/view.html.twig #}
+    {# src/My/BlogBundle/Resources/views/Default/show.html.twig #}
     {% extends 'MyBlogBundle::layout.html.twig' %}
     
     {% block body %}
@@ -149,12 +149,12 @@ extends 構文を記述し、今まで書いてあったコンテンツを body 
 
 .. code-block:: jinja
 
-    {# src/My/BlogBundle/Resources/views/Default/add.html.twig #}
+    {# src/My/BlogBundle/Resources/views/Default/new.html.twig #}
     {% extends 'MyBlogBundle::layout.html.twig' %}
     
     {% block body %}
     <h1>Add Post</h1>
-    <form action="{{ path('blog_add') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('blog_new') }}" method="post" {{ form_enctype(form) }} novalidate>
         {{ form_widget(form) }}
         <input type="submit" value="Save Post" />
     </form>
@@ -167,7 +167,7 @@ extends 構文を記述し、今まで書いてあったコンテンツを body 
     
     {% block body %}
     <h1>Edit Post</h1>
-    <form action="{{ path('blog_edit', {'id':id}) }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('blog_edit', {'id':post.id}) }}" method="post" {{ form_enctype(form) }} novalidate>
         {{ form_widget(form) }}
         <input type="submit" value="Save Post" />
     </form>
@@ -177,17 +177,17 @@ extends 構文を記述し、今まで書いてあったコンテンツを body 
 ------------------
 
 修正したテンプレートの結果をブラウザで確認してみましょう。
-HTMLソースを見てみると、<html>タグが出力されていることが確認できます。
+HTMLソースを見てみると、\ ``<html>`` タグが出力されていることが確認できます。
 もう1つ大きく違うのは、ページ下部にWebProfilerのツールバーが表示されていることです。
 
 .. note::
 
     このWebProfilerのツールバーはapp_dev.phpでアクセスしているときにしか表示されません。
-    </body>閉じタグの直前に埋め込まれる仕組みになっています。
-    </body>閉じタグが見つからない場合は表示されません。
+    ``</body>`` 閉じタグの直前に埋め込まれる仕組みになっています。
+    ``</body>`` 閉じタグが見つからない場合は表示されません。
 
 
-もっとテンプレートについて知りたい場合は `Templating`_ を参照してください。
+もっとテンプレートについて知りたい場合は、ガイドブックの\ `テンプレートの基本`_\ を参照してください。
 
-.. _`Templating`: http://symfony.com/doc/current/book/templating.html
+.. _`テンプレートの基本`: http://docs.symfony.gr.jp/symfony2/book/templating.html
 
