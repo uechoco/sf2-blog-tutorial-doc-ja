@@ -31,7 +31,7 @@
         public function buildForm(FormBuilder $builder, array $options)
         {
             $builder
-                ->add('name');
+                ->add('name')
                 ->add('price', 'money', array('currency' => 'USD'))
             ;
         }
