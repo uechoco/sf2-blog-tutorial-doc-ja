@@ -52,7 +52,7 @@ Postモデル用のフォームの作成
         public function newAction()
         {
             // フォームのビルド
-            $form = $this->createFormBuilder(new Post())
+            $form = $this->createFormBuilder(new Post())  // ここでPostクラスを使うため、ファイルの先頭あたりにuseを追加していることに注意
                 ->add('title')
                 ->add('body')
                 ->getForm();
